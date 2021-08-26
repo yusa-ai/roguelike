@@ -36,8 +36,8 @@ function love.load()
     -- Player animations
     local player_grid = anim8.newGrid(50, 37, sprites.player:getWidth(), sprites.player:getHeight())
     p_animations = {
-        idle = anim8.newAnimation(player_grid("1-4", 1), 0.2),
-        run = anim8.newAnimation(player_grid("2-5", 2), 0.1),
+        idle = anim8.newAnimation(player_grid("4-7", 6), 0.2),
+        run = anim8.newAnimation(player_grid("2-7", 2), 0.1),
         atk = anim8.newAnimation(player_grid("1-5", 7), 0.1),
     }
 
@@ -86,6 +86,8 @@ end
 
 function love.draw()
     camera:draw(drawCamera)
+
+    love.graphics.print('Frame ' .. player.animation.position, 0, 0)
 end
 
 function love.mousepressed(x, y, button, istouch, presses)
