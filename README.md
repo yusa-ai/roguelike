@@ -18,7 +18,7 @@ I am only creating this to extend my knowledge base.
 ## Libraries
 ------------
 - [anim8](https://github.com/kikito/anim8)
-- [hump](https://github.com/vrld/hump)
+- [gamera](https://github.com/kikito/gamera)
 - [windfield](https://github.com/a327ex/windfield)
 
 ## Credits

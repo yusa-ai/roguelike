@@ -1,7 +1,7 @@
 function love.load()
     local windfield = require("libraries.windfield")
     local anim8 = require("libraries.anim8")
-    local camera = require("libraries.hump.camera")
+    local gamera = require("libraries.gamera")
 
     -- Window settings
     love.window.setMode(1000, 500)
@@ -33,9 +33,9 @@ function love.load()
     player.speed = 150
     player.animation = p_animations.idle
     
-    -- Player camera
-    player_camera = camera()
-    player_camera.scale = 2
+    -- Camera
+    camera = gamera.new(0, 0, love.graphics.getWidth(), love.graphics.getHeight())
+    camera:setScale(2.0)
 end
 
 function love.update(dt)  
@@ -58,12 +58,18 @@ function love.update(dt)
     -- Animations
     player.animation:update(dt)
 
-    player_camera:lookAt(px, py)
+    -- Camera
+    camera:setPosition(px, py)
 end
 
 function love.draw()
-    player_camera:attach()
+    camera:draw(drawCamera)
 
+    -- DEBUG
+    love.graphics.print("Cursor position: " .. love.mouse.getX() .. ", " .. love.mouse.getY(), 0, 0)
+end
+
+function drawCamera()
     -- Background
     local sx = love.graphics.getWidth() / sprites.background:getWidth()
     local sy = love.graphics.getHeight() / sprites.background:getHeight()
@@ -74,9 +80,4 @@ function love.draw()
     -- Player
     local px, py = player:getPosition()
     player.animation:draw(sprites.player, px, py, nil, player.direction, 1, 50/2, 37/2)
-
-    player_camera:detach()
-
-    -- DEBUG
-    love.graphics.print("FPS: " .. math.floor(love.timer.getFPS()), 0, 0)
 end
